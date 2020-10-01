@@ -1,0 +1,56 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!DOCTYPE html>
+
+<!-- Condicionais V1 / Exemplo 2 (V-ELSE-IF) -->
+
+<!-- 
+    Criar variável anonimo e usa-la em <p> com v-else-if
+        <p v-else-if="anonimo"></p>
+    
+        Se não entrar no primeiro paragrafo, ou seja logado = false, ele vai entrar no segundo:
+            <p v-if="logado">Usuário Logado: {{nome}}. </p>
+            <p v-else-if="anonimo">Navegando como anonimo</p>
+            <p v-else>Nenhum usuário logado.</p>
+    
+    Posso ter quantos casos eu quiser, com if, else-if e else, desde que eles estejam um seguido do outro.
+
+-->
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <p v-if="logado">Usuário Logado: {{nome}}. </p>
+        <p v-else-if="anonimo">Navegando como anonimo</p>
+        <p v-else>Nenhum usuário logado.</p>
+        <button @click="logado = !logado">
+            {{logado ?  'Sair'  :  'Entrar'  }}</button>
+        <input type="checkbox" v-model="anonimo">
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            nome: 'Gustavo Alves Vasconcelos',
+            logado: false,
+            anonimo: true,
+        },
+        methods: {
+
+        }
+    })
+</script>

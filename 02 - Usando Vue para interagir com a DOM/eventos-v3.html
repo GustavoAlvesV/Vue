@@ -1,0 +1,46 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- PASSANDO NOSSOS PRÓPRIOS ARGUMENTOS COM EVENTOS -->
+
+<!--  No momento que eu coloco meu parâmetro específico, automaticamente o evento já não é passado por padrão.
+
+    Ou seja, o evento não é mais passado no momento que especifiquei o parâmetro.
+
+    Agora para eu passar o evento, exite uma palavra reservada "$event", usando ela você está que quer saber o evento que gerou
+    a função.
+
+    O evento gerado é algo do js, NÃO É ALGO PERSONALIZADO PARA O VUEJS
+
+-->
+
+<div id="app">
+    <p>{{ contador }}</p>
+    <button v-on:click="somar(5, $event)">Somar</button>
+    <p v-on:mousemove="atualizarXY"> MOUSE: {{x}} e {{y}}</p>
+
+
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            somar(passo, event) {
+                console.log(event);
+                this.contador += passo;
+            },
+            atualizarXY(event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            }
+        }
+    })
+</script>
+

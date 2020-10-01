@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {{ nome }}  {{ sobrenome }}  {{ 1+1 }}
+    </div>
+
+</body>
+
+</html>
+
+<script>
+//OBSERVAÇÃO: NÃO ESTOU IMPORTANDO A BIBLIOTECA VUE, O 'MEUVUE' ESTÁ USANDO O FRAMEWORK PARA FAZER TODO O TRABALHO
+
+
+    function MeuVue(params) {
+        this.$el = document.querySelector(params.el); //Muitas variáveis interna do VUE começa com o $.
+        this.$data = params.data; //No VUE tem muitas coisas acontecendo por trás, não é somente uma atribuição.
+
+        //Quero criar umas propriedades que ficam diretamente dentro da minha instância
+        // para criar os proxys
+        // e logicamente os dados apenas serão alterado aqui dentro.
+
+        for (let atr in this.$data) {  //Faço um for pegando cada um dos atributos passados dentro do $data
+
+            // Para cada atributo de $data, eu vou criar uma propriedade para ele.
+            // Entao vou criar um metodo get (serve de proxy => ou seja, a partir dessa propriedade ele vai pegar 
+            // e retornar outra propriedade) e 
+            // set, para meu atributo.
+
+            // Então estou criando funções get() e set(), ou seja, propriedades do JS.
+            // e eu não vou a parte do get() nem do set(), essas duas funções serão chamadas
+            // automaticamente quando eu quiser ler o valor da variável ou/e 
+            // alterar o valor da variável
+
+            Object.defineProperty(this, atr, {
+                get: () => {
+                    return this.$data[atr];
+                },
+                set: (value) => {
+                    // ... posso colocar algum codigo para interceptar o valor antes de modifica-lo
+                    this.$data[atr] = value
+                }
+            }); 
+        }
+
+        //inteporlar
+
+        const regex = /\{\{([\s\w+]*)\}\}/g;
+        this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) => {
+            const value = this[$1.trim()]
+            return value ? value : eval($1);
+        })
+    }
+
+    const vm = new MeuVue({
+        el: '#app',
+        data: {
+            nome: 'Maria',
+            sobrenome: 'Silva'
+        }
+    })
+
+
+
+    console.log(vm.nome); // é apenas uma função proxy
+    console.log(vm.$data.nome); // Local original onde o dado está armazenado
+
+    vm.nome = 'pedro';
+    console.log(vm.nome);
+
+</script>

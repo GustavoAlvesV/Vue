@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- ESCUTANDO EVENTOS -->
+
+<!-- 
+    V-ON:
+    É UMA DIRETIVA QUE VOCÊ INTERCEPTA OS EVENTOS, OU SEJA, QUANDO UM EVENTO ACONTECER, SEJA ELE, 
+    ON-CLICK, ON-MOUSE, OU QUALQUER OUTRO EVENTO QUE VOCÊ DESEJA TRATAR,
+    VOCE VAI CHAMAR UMA FUNÇÃO.
+
+    RESUMINDO:
+    É A DIRETIVA QUE VAI FICAR ESCUNTANDO O EVENTO QUE VEM LOGO EM SEGUIDA 
+    E A FUNÇÃO QUE SERA CHAMADA COM ESSE EVENTO.
+
+-->
+
+<div id="app">
+    <p>{{ contador }}</p>
+    <button v-on:click="somar()">Somar 1</button>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0
+        },
+        methods:{
+            somar(){
+                this.contador++;
+            }
+        }
+    })
+</script>

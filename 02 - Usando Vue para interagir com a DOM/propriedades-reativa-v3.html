@@ -1,0 +1,81 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<!--  Monitorando mudanças  -->
+
+<!-- Propriedade da VUE instance "WATCH": 
+        quando vc monitorar as mudancas de uma determinada variavel e fazer algo em resposta a essas alterações;
+    
+    E diferente do conceito de uma propriedade COMPUTED ou METHODS,
+    nesses o método chamado tem que retornar algo sincrono, ou seja, chamou a função o retorno tem que está pronto pra ser usado
+    no template.
+
+    Já no caso do WATCH conseguimos fazer ações assíncronas.
+    No caso do WATCH vc tem que ter conflito, diferente das outras propriedades, no watch vc tem quer dizer
+    exatamente qual é o nome da propriedade que voce quer monitorar a partir da chamada dessa função.
+
+
+
+    Resumindo:
+    
+        Propriedades computadas são sincronas.
+
+        Propriedades watch são assincronas.
+        
+-->
+
+
+<div id="app">
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="contador2++">Aumentar2</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <p>Contador: {{contador}}</p>
+    <p>Contador2: {{contador2}}</p>
+    <p>Resultado: {{resultado}}</p>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            contador2: 0,
+        },
+        computed: {
+            resultado() {
+                return this.contador >= 5 ?
+                    'MAIOR OU IGUAL A 5' : 'MENOR DO QUE 5'
+            }
+        },
+        watch:{
+            contador(novo, antigo){
+                setTimeout(() => {
+                    this.contador = 0;
+                }, 2000)
+            },
+ /*           contador(novo, antigo){
+                const instanceVue = this;
+                setTimeout( function(){
+                    instanceVue.contador = 0;
+                }, 2000)
+            }                               */
+        },
+        methods: {
+            aumentar() {
+                this.contador++;
+                //this.resultado = this.contador >= 5 ?  "Maior ou igual a 5" : 'Menor que 5';
+            },
+            diminuir() {
+                this.contador--;
+                //this.resultado = this.contador >= 5 ?  "Maior ou igual a 5" : 'Menor que 5';
+            },
+            /*resultado() {
+                return this.contador >= 5 ?
+                    'MAIOR OU IGUAL A 5' : 'MENOR DO QUE 5'
+            }*/
+
+        }
+    })
+</script>

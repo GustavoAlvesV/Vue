@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <span>{{contador}} </span>
+    <button @click="contador++"> + </button>
+    <button @click="contador--"> - </button>
+</div>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0
+        }
+    })
+</script>
+
+
+<!--
+    PROBLEMA DESSA ABORDAGEM:
+        SE EU QUISE TER 2 CONTADORES IDENPENDETES, COM MESMO NOME,
+        NÃO TERA COMO FAZER ISSO AQUI.
+
+    SOLUÇÃO:
+        COMPONENTES.
+-->

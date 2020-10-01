@@ -1,0 +1,88 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!DOCTYPE html>
+
+<!-- Condicionais V1 / Exemplo 4 (v-shoW)-->
+
+<!-- 
+    V-SHOW:
+        Ele também trabalha com a visibilidade dos elementos com renderização condicional,
+        só que ele não vai remover não vai fazer um despacho do elemento dentro da DOM dentro
+        da página em geral.
+
+        Ele mexe no CSS, NO DISPLAY.
+
+        v-show nao tem um v-else como o v-if.
+
+        
+
+    DOM:
+        que é exatamente a estrutura em árvore que é gerada a partir de todos os elementos que o seu HTML define,
+        ou seja, quando BROWSER interpreta o HTML ele gera em memória a DOM,
+        e você consegue manipulando a DOM, isso refletir no HTML que é gerado e interpretado pelo BROWSER. 
+
+
+        Então VUE ele e manipulador a DOM    várias formas como nós vimos isso no capítulo anterior.
+
+        Mas o fato, agora, é que com a renderização condicional usando o v-show, 
+        ele não vai excluir o elemento da DOM,
+        ele vai simplesmente aplicar um estilo CSS para fazer com que esse elemento não apareça mais por enquanto
+        e fica menos custoso digamos assim tanto para esconder como para exibir novamente.
+
+-->
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <template v-if="logado">
+            <p>Usuário Logado: {{nome}}. </p>
+            <p>Perfil: ADMIN</p>
+        </template>
+        <p v-else-if="anonimo">Navegando como anonimo</p>
+        <p v-else>Nenhum usuário logado.</p>
+        <button @click="logado = !logado">
+            {{logado ?  'Sair'  :  'Entrar'  }}</button>
+        <input type="checkbox" v-model="anonimo">
+        
+        <hr>
+
+        <footer v-show="logado">
+            Desenvolvido pra você!
+        </footer>
+        <footer v-show="!logado">
+            Desenvolvido pra você que é desconhecido!
+        </footer>
+    
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            nome: 'Gustavo Alves Vasconcelos',
+            logado: false,
+            anonimo: true,
+        },
+        methods: {
+
+        }
+    })
+</script>

@@ -1,0 +1,71 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<!--  PROPRIEDADES COMPUTADAS -->
+
+<!-- Em propriedade computada, voce não a chama como metodo e sim como outro atributo.
+        
+        Errado: <p>Resultado: {{resultado()}}</p>
+        Correto:  <p>Resultado: {{resultado}}</p>
+
+    A diferenca de usar metodo computado ou uma função em methods, como exemplo abaixo, é que: 
+
+        em methods, a função é chamada mesmo quando o resultado não é alterado.
+        
+        Já usando metodo computado (computed) a função só é chamada quando resultado é alterado.
+    
+
+    Methods:
+        They are static functions usually used to react to events which happen in the DOM and 
+        ELAS ACEITAM ARGUMENTOS.
+        They are often used to run a functionality from the DOM.
+    
+    Computed:
+        NÃO ACEITAM ARGUMENTOS
+        They are often used to do calculation and at the end to return a value.
+
+-->
+
+
+<div id="app">
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="contador2++">Aumentar2</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <p>Contador: {{contador}}</p>
+    <p>Contador2: {{contador2}}</p>
+    <p>Resultado: {{resultado}}</p>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            contador2: 0,
+        },
+        computed: {
+            resultado() {
+                console.log('Metodo Computed: Resultado chamando...');
+                return this.contador >= 5 ?
+                    'MAIOR OU IGUAL A 5' : 'MENOR DO QUE 5'
+            }
+        },
+        methods: {
+            aumentar() {
+                this.contador++;
+                //this.resultado = this.contador >= 5 ?  "Maior ou igual a 5" : 'Menor que 5';
+            },
+            diminuir() {
+                this.contador--;
+                //this.resultado = this.contador >= 5 ?  "Maior ou igual a 5" : 'Menor que 5';
+            },
+            /*resultado() {
+                return this.contador >= 5 ?
+                    'MAIOR OU IGUAL A 5' : 'MENOR DO QUE 5'
+            }*/
+
+        }
+    })
+</script>

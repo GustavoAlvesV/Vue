@@ -1,0 +1,91 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!DOCTYPE html>
+
+<!-- LISTA / IDENTIFICANDO OS ELEMENTOS NO V-FOR (:key)-->
+
+<!-- 
+    Quando voce tem mudanças na lista, seja:
+        mudanças de order, ou novos porque novos elementos forem adicionados,
+    é importante que voce dê para o VUE uma dica. (:key)
+    
+    Quando voce tem um template mais complexo a importancia da chave (key) aumenta bastante.
+
+    A key e usada para que o VUE possa rastrear a identidade de cada elemento de cada nó e assim
+    reutirlizar e reordenar elementos existentes.
+
+    Nao e legal utilizar um key auto-gerada, o ideal e utilizar um aributo do proprio objeto.
+
+
+-->
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="(cor,i) in cores"
+                :key="cor"> {{i+1}}) {{cor}} </li>
+        </ul>
+        <input type="text" v-model="novaCor">
+        <button @click="cores.push(novaCor)">Adicionar</button>
+
+        <hr>
+
+        <template v-for="(cor,i) in cores">
+            <h1> {{cor}} </h1>
+            <p> {{i}} - </p>
+        </template>
+
+        <hr>
+
+        <h2>Imprimindo array só valores => Valor do atributo(valor), nome do Atributo(chave), e index(index)</h2>
+        <li v-for="pessoa in pessoas">
+            <div v-for="(valor, chave, index) in pessoa">
+                {{chave}} -
+                {{valor}}
+                ({{index}})
+            </div>
+        </li>
+
+        <hr>
+
+        <span v-for="n in 10"> {{ n }}</span>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            novaCor: '',    
+            cores: ['vermelho', 'verde', 'amarelo', 'azul'],
+            pessoas: [
+                { nome: 'Ana', idade: 26, peso: 59 },
+                { nome: 'Guilherme', idade: 22, peso: 60 }
+            ]
+        }
+    })
+</script>
+
+<STYLE>
+    ul {
+        list-style: none;
+    }
+
+    h1,
+    p {
+        display: inline;
+    }
+</STYLE>

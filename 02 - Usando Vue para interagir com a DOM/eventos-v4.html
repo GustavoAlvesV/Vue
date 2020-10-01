@@ -1,0 +1,72 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- MODIFICADORES DE EVENTO -->
+
+<!--  
+    PROBLEMA: 
+        QUERO QUE DENTRO DA AREA DO <SPAN> O EVENTO DO MOUSE MOVE NÃO SEJA DISPARADO.
+
+    Solução (são 2): 
+        1) event.stopPropagation(); => Como mostrado na função parar(); 
+        2) usar o modificador de evento chamado STOP. => <span v-on:mousemove.stop="">PARA AQUI</span>
+
+    Ambos fazem a mesma coisa: Para a propagação do evento da area marcada.    
+
+
+
+    Outro comportamento do modificador de evento muito comum é o "PREVENT DEFAULT" que vai previnir o comportamento padrão.
+
+            Ex: <p v-on:click.prevent="" href="http://google.com">Google</p> 
+                No exemplo acima, não existira um link
+
+    Outra maneira de utilizar o "PREVENT DEFAULT" é utilizando uma função:
+            <a v-on:click="naoNavegar" href="http://gmail.com">Google</a>
+            Ex: naoNavegar(event) {
+                    event.preventDefault();
+                }
+    
+
+-->
+
+
+<div id="app">
+    <p>{{contador}}</p>
+    <button v-on:click="somar(5, $event)">Somar 1</button>
+    <p v-on:mousemove="atualizarXY">
+        Mouse {{x}} e {{y}}
+        <span v-on:mousemove.stop="">PARA AQUI</span>
+    </p>
+    <a v-on:click.prevent="" href="http://google.com">Google</a>
+    <a v-on:click="naoNavegar" href="http://gmail.com">Gmail</a>
+</div>
+
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            somar(passo, $event) {
+                console.log(passo, event);
+                this.contador += passo;
+            },
+            atualizarXY(e) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            parar(e) {
+                e.stopPropagation();
+            },
+            naoNavegar(event) {
+                event.preventDefault();
+            }
+
+        }
+    })
+</script>

@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- Acessando Dados na Instância VueJS -->
+
+<div id="app">
+    <p>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>  <!-- Para chamar o método no JS-->
+</div>
+
+    
+<!-- dentro do Vue, não posso ter uma função e um dado com mesmo nome.
+    pq o vue joga tudo pra raiz da instancia do vue-->
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!'
+        },
+        methods: {
+            saudacao: function (event) {
+                console.log(this);
+                return this.titulo;
+            }
+        }
+    })
+</script>
+

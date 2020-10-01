@@ -1,0 +1,47 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- V-ONCE: EVITANDO RE-RENDERIZAÇÃO -->
+
+<!-- PROBLEMA: SE EU MUDAR O VALOR DO THIS.TIULO NA INSTANCIA DO VUE, A VUE ATUALIZA AUTOMATICANTE. 
+    
+    PERGUNTA: E SE EU QUISE QUER O VALOR DE {{TITULO}} SEJA RENDERIZADO APENAS UMA VEZ?? 
+    SOLUÇÃO: V-ONCE
+
+    TAG COM V-ONCE: A TAG vai ler esse valor apenas uma única vez, vai INTERPRETAR esse valor, ou seja, 
+    substitui o valor, resolver esse valor e colocar diretamente na TAG <P> e 
+    não vai mais ficar monitorando pra saber se é preciso alterar um determinado valor.
+    
+    Porque ele vai resolver apenas a primeira vez.
+    
+
+    OBSERVAÇÃO:
+        A instância do VUEJS tem o template todo em memória e sempre que a mudança, 
+        ele gera novamente o template já atualizando somente aquilo que precisa ser atualizado.
+-->
+
+
+<div id="app">
+    <p v-once>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>  
+    <a V-bind:href="link">Google</a>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!',
+            link: 'http://google.com'
+        },
+        methods: {
+            saudacao: function (event) {
+                this.titulo = 'Bom dia!'
+                return this.titulo;
+            }
+        }
+    })
+</script>
+
+

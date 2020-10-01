@@ -1,0 +1,21 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<!-- template, OU SEJA, TRECHO DE HTML CONTROLADO PELO VUE -->
+
+<div id="app">
+    <p>{{ titulo }}</p>
+</div>
+
+
+<!-- Vue é o intermediário entre o template e aquilo que será renderizado. 
+    Se eu não tivesse o vue, ninguem iria interpretar os {{titulo}}-->
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!'
+        }
+    })
+</script>

@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!DOCTYPE html>
+
+<!-- LISTA / ACESSANDO INDICE PERCORRIDA NA LSTA-->
+
+<!-- 
+    é possivel acessar, além do valor, mas também o indice de um elemento de uma lista.
+
+
+    Para isso vou usar o "(cor,i) in cores", onde "i" será o indice daquele elemento.
+    A ordem importa (ELEMENTO, indice).
+
+        <ul>
+            <li v-for="(cor,i) in cores"> {{i+1}}) {{cor}} </li>
+        </ul>    
+
+-->
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <li v-for="(cor,i) in cores"> {{i+1}}) {{cor}} </li>
+        </ul>    
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           cores: ['vermelho', 'verde', 'amarelo', 'azul'],
+           pessoas: [
+               {nome: 'Ana', idade: 26, peso: 59},
+               {nome: 'Guilherme', idade: 22, peso:60 }
+           ]
+        }
+    })
+</script>
+
+<STYLE>
+    ul{
+        list-style: none;
+    }
+</STYLE>

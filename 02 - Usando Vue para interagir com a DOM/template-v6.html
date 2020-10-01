@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- IMPRIMINDO HTLM PURO -->
+
+<!-- Quero agora imprimir o link completo, ou seja, o código em HTML na página
+    Perceba que o VUE NÃO VAI INTERPRETAR O HTML, OU SEJA, AS TAG HTML, 
+    e isso é bom, porque trás segurança ao código
+-->
+
+
+<!-- Mas, exite um forma do VUE interpretar o HTML:
+    USANDO DIRETIVA => V-HTML="NOME DA PROPRIEDADE QUE QUERO QUE SEJA INTERPRETA COM HTML", NÃO PRECISA DO {{}}.
+-->
+
+
+<div id="app">
+    <p v-once>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>  
+    <a V-bind:href="link">Google</a>
+    <p v-html = "linkHtml"></p>    <!-- Interpretando HTML com VUE-->
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!',
+            link: 'http://google.com',
+            linkHtml: '<a href="http://google.com">Google</a>'
+        },
+        methods: {
+            saudacao: function (event) {
+                this.titulo = 'Bom dia!'
+                return this.titulo;
+            }
+        }
+    })
+</script>
+
+

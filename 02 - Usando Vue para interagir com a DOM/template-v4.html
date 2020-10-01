@@ -1,0 +1,71 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--QUERO ACESSAR O LINK NO DADO VUE PELO TEMPLATE-->
+
+<!-- <a href="link">Google</a>  Para acessar link no VUE não usa {{}}, porque o href intepreta forma literal e não o dado. SOLUÇÃO: DIRETIVA    -->
+
+<!-- DIRETIVA => V-BIND: SERVE PARA FAZER UMA LIGAÇÃO ENTRE ALGO QUE ESTÁ NA VUE INSTANCE E UM ATRIBUTO DA SUA TAG DENTRO DO TEMPLATE-->
+<!-- COMO USAR:    V-BIND: 'NOME DA PROPRIERADE QUE VOCê QUER FAZER O BIND' = "VALOR"   -->
+
+<!-- APÓS USAR V-BIND, O VALOR DO "LINK" SERÁ INTERPRETADO PELO VUE, SEM AS CHAVES {{}}, E VAI RESOLVER O PROBLEMA, SUBTITUINDO PELO LINK QUE 
+    DEFINIDO. -->
+
+<!-- É muito importante você entender que uma coisa é você ter algo que vai ser colocado diretamente dentro do HTML.
+    Por exemplo: <p>{{ titulo }}</p> nos conteúdos das teles, isso é um valor textual que vai usar o padrão da {{}} 
+    para ser interpretado ou interpelado. 
+
+    Mas, no caso de propriedades dentro das tags do HTML, você vai ter que usar as diretivas. 
+    Existem várias formas de fazer isso. Essa é a primeira forma que eu vou mostrar pra vocês:
+        Usando o V-BIND, ou seja, 
+            fazer a ligação binding entre um dado que está na VIU INSTANCE é o atributo de uma propriedade da TAG.-->
+
+
+<div id="app">
+    <p>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>  <!-- Para chamar o método no JS-->
+    <!-- <a href="link">Google</a> NAO DA CERTO-->
+    <a V-bind:href="link">Google</a>
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!',
+            link: 'http://google.com'
+        },
+        methods: {
+            saudacao: function (event) {
+                console.log(this);
+                return this.titulo;
+            }
+        }
+    })
+</script>
+
+
+<!-- Conceito de DIRETIVA: 
+
+    é do que uma propriedade personalizada que não é nativa do HTML, mas o HTML5 permite que você adicione novas propriedades.
+
+    Então por exemplo vamos supor que eu queira criar uma propriedade personalizada da 'Coder', 
+    então posso botar 'C3R-BIND', e essa propriedade pode ter inclusive um determinado valor.
+    ' C3R-BIND = "ABC" '
+    
+    Eu consigo a partir do JavaScript.
+    Consultado Tags que tem essa propriedade definida na sua estrutura pelo browser.
+
+    Então diretiva, não tem nada haver com o VUE, 
+    Eu estou simplesmente dizendo que o VUE, ele usa um conjunto de propriedades personalizadas, usando essa
+    esse recurso do HTML que você consegue colocar propriedades que não existem pra fazer algum tipo de
+    processamento usando JavaScript.
+
+    Então o VUE vai lá detecta quais são as diretivas usadas nas TAGS, e isso faz com que esses valores
+    sejam interpretados e substituídos pelos valores correspondentes aos valores corretos de acordo com
+    a VUE instance que você definiu os dados. 
+    
+    Então só pra dizer que diretiva são propriedades personalizadas, 
+    e essas propriedades são interpretadas pelo VUE, e a nomenclatura que o VUE usa é dizer que são diretivas.
+-->

@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<!--  Usando two-way binding -->
+
+<!--
+    <p>{{ titulo }}</p>
+    <input type="text" v-bind:value="titulo">
+
+    TENHO 2 VIEWS ACONTECENDO:
+        1) VIEW DA CAMADA DE VISÃO (html)=> SE MOTIFICADO NÃO MOTIFICA A VIEW INSTANCE VUE.
+        2) VIEW INSTANCE DO VUE => SE MODIFICADO, AUTOMATICAMENTE ELE VAI MODIFICAR A VIEW DA CAMADA DE VISAO, O HTML.   
+        logo, O SENTIDO DO V-BIND É SEMPRE DO FRAMEWORK VUE ALTERANDO O TEMPLATE/html.
+    
+        O TWO-WAY BINDING é => 
+            QUANDO ALTERAR O HTML ALTERA O VUE (V-ON:input),
+            e QUANDO EU ALTERAR A VUE ALTERA O HTML (V-BIND)
+    
+            EX:     <p>{{ titulo }}</p>
+                    <input type="text" 
+                    v-bind:value="titulo" 
+                    v-on:input="titulo = $event.target.value">
+
+            ISSO SIGNIFICA QUE: 
+                    A PARTIR DO MEU INPUT EU CONSIGO ALTERAR A PROPRIEDADE DO VUE, O TITULO, 
+                    E O TITULO SENDO ALTERADO GERA IMPACTO NO HTML/TEMPLATE GERADO. 
+                    
+    
+    EXISTE UMA FORMA MAIS FACIL DE FAZER O TWO-WAY BINDING, AO INVES DE USAR V-BIND + V-ON, PODE-SE USAR O: 
+            'V-MODEL'
+            Ex:     <input type="text" v-model="titulo2">
+
+    V-BIND => JS PARA O HTML.
+    V-ON => PEGO UM EVENTO QUE ACONTECEU NO HMTL, E POSSO FAZER ALGUMA ALTERAÇÃO PARA ATUALIZAR OS DADOS DENTRO DO JS.
+    V-MODEL => FAÇO OS DOIS SENTIDOS.
+-->
+
+
+<div id="app">
+    <p>{{ titulo }}</p>
+    <input type="text" v-bind:value="titulo"
+        v-on:input="titulo = $event.target.value">
+    
+    <p>{{ titulo2 }}</p>
+    <input type="text" v-model="titulo2">
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'usando V-ON + V-BIND',
+            titulo2: 'Usando V-MODEL'
+        }
+    })
+</script>

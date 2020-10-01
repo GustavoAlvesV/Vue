@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<!-- Vue cria acesso direto de dentro do template, utilizando {{}} -->
+<!-- Onde tiver padrao {{}} o vue vai le o que esta escrito la dentro e executar esse codigo e deve retornar uma STRING -->
+<!-- TANTO AQUILO QUE É ATRIBUTO OU QUE VAI RETORNADO A PARTIR DE UMA FUNÇÃO INTERPRERTADA DENTRO DO PADRAO {{}} SIGNIFICA QUE DEVE SER RETORNADO COMO STRING
+    JÁ QUE O HTML É UM PADRÃO TEXTUAL, TUDO O QUE ESTÁ NO HTML TEM VALOR DE STRING. -->
+
+<div id="app">
+    <p>{{ titulo }}</p>
+    <p>{{ saudacao() }}</p>  <!-- Para chamar o método no JS-->
+</div>
+
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando o Vue.js 2!'
+        },
+        methods: {
+            saudacao: function (event) {
+                return 'Boa Semana!'
+            }
+        }
+    })
+</script>
