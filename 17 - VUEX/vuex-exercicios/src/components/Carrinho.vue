@@ -25,14 +25,31 @@
     </Painel>
 </template>
 
+
+
 <script>
+
+import {mapGetters} from 'vuex'  //pra poder usar mapgetters
+
+
 export default {
-    computed: {
-        total() {
-            return this.produtos.map(p => p.quantidade * p.preco)
-                .reduce((total, atual) => total + atual, 0)
+    computed: { 
+        ...mapGetters('carrinho', {             // => Tenho que usar '...' porque tenho mais de uma função nas propriedades computadas
+            total: 'valorTotal'
+        }),
+
+ //       total() {  Sem mapGetter
+ //           return this.$store.getters.valorTotal;
+ //       },
+                            /*  Foi centralizado na STORE:
+                                    return this.produtos.map(p => p.quantidade * p.preco)
+                                    .reduce((total, atual) => total + atual, 0)*/
+        produtos(){
+            return this.$store.state.carrinho.produtos
         }
     },
+    
+/*  Como centralizei em store os produtos, não preciso mais de data no Caarrinho.  
     data() {
         return {
             produtos: [
@@ -42,6 +59,7 @@ export default {
             ]
         }
     }
+*/
 }
 </script>
 

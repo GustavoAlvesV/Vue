@@ -9,13 +9,30 @@
 </template>
 
 <script>
+
+import {mapGetters} from 'vuex'  //pra poder usar mapgetters
+
 export default {
+
+    computed: mapGetters('carrinho', {
+        total: 'valorTotal'
+    })
+
+/* Ambos computed estão corretos  
     computed: {
         total() {
-            return this.produtos.map(p => p.quantidade * p.preco)
-                .reduce((total, atual) => total + atual, 0)
-        }
-    },
+            
+            return this.$store.getters.valorTotal;  */
+           /*  Foi centralizado na STORE
+                return this.produtos.map(p => p.quantidade * p.preco)
+                .reduce((total, atual) => total + atual, 0)*/
+//       },
+        /* COMO O VALOR TOTAL JA E CALCULADO NA STORE, NAO PRECISO MAIS DA LISTA DE PRODUTOS.
+        produtos(){
+            return this.$store.state.produtos
+        }*/
+//    },
+/*
     data() {
         return {
             produtos: [
@@ -25,6 +42,7 @@ export default {
             ]
         }
     }
+*/
 }
 </script>
 
