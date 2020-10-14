@@ -4,7 +4,7 @@ module.exports = app => {
 
     // SÃO AS REGRAS, PARA DIZER, O QUE DENTRO DO MEU SISTEMA DEVE EXISTIR
     // OU EXISTE OU ERRO (SE NAO EXISTIR É ERRO)
-    function existsOrError(value){
+    function existsOrError(value, msg){
         if(!value) throw msg
         if(Array.isArray(value) && value.length == 0) throw msg
         if(typeof value === 'string' && !value.trim())  throw msg 

@@ -2,6 +2,7 @@ module.exports = app => {
 
     const  { notExistsOrError, existsOrError } = app.api.validation 
 
+    // vai ter o salvar e o alterar
     const save = ( req, res ) => {
         const category = { ...req.body }
 
@@ -44,8 +45,9 @@ module.exports = app => {
 
             const rowsDeleted = await app.db('categories')
                 .where({ id: req.params.id }).del()
-            
             existsOrError(rowsDeleted, 'Categoria não foi encontrada.')
+
+            console.log(rowsDeleted)
 
             res.status(204).send()
         }catch(msg) {
@@ -102,5 +104,28 @@ module.exports = app => {
             .catch( err => res.status(500).send(err) )
     }
     
-    return { save, remove, get, getById }
+
+    const toTree = (categories, tree) => {
+        if(!tree) tree = categories.filter(c => !c.parentId) // Vai filtrar todas categorias que nao tem pai,
+                                                            // e entao adicioná-la a uma variavel tree
+
+        tree = tree.map(parentNode => { //Função recursiva para mapear todos os filhos de cada pai (vai pegar cada pai, ou seja, elemento da arvore e chamar essa função abaixo)
+
+            const isChild = node => node.parentId == parentNode.id //Função para verificar se um nó é filho de um Nó pai.
+
+            parentNode.children = toTree(categories, categories.filter(isChild)) //adiciona ai pai uma propriedade chamada childen, e ela contera os elementos filhos desse pai
+
+            return parentNode
+        })
+        return tree
+    }
+
+    const getTree = ( req, res ) => {
+        app.db('categories')
+            .then( categories => res.json(toTree(withPath(categories))))
+            .catch( err => res.status(500).send(err) )
+    }
+
+
+    return { save, remove, get, getById, getTree }
 }

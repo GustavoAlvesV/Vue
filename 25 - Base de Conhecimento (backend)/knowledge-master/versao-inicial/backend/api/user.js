@@ -30,8 +30,8 @@ module.exports = app => {
             if(!user.id){
                 notExistsOrError(userFromDB, 'Usuário já cadastrado')
             }
-        }   catch(msg) {
-                return res.status(400).send(msg) //400: erro do lado cliente
+        }catch(msg) {
+               return res.status(400).send(msg) //400: erro do lado cliente
         }
         
 
@@ -62,11 +62,11 @@ module.exports = app => {
 
     const getById = ( req, res ) => {
         app.db('users')
-        .select('id', 'name', 'email', 'admin')
-        .where({ id: req.params.id })
-        .first()
-        .then(users => res.json(users))
-        .catch(err => res.status(500).send(err))
+            .select('id', 'name', 'email', 'admin')
+            .where({ id: req.params.id })
+            .first()
+            .then(user => res.json(user))
+            .catch(err => res.status(500).send(err))
     }
 
     return { save, get, getById }
