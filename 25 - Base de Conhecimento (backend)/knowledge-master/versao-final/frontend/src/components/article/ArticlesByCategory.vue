@@ -1,5 +1,6 @@
 <template>
     <div class="articles-by-category">
+        
         <PageTitle icon="fa fa-folder-o"
             :main="category.name" sub="Categoria" />
         <ul>

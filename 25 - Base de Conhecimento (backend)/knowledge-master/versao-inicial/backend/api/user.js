@@ -23,7 +23,7 @@ module.exports = app => {
         try{
             existsOrError(user.name, 'Nome não informado')
             existsOrError(user.email, 'Email não informado')
-            existsOrError(user.password, 'Senha não informado')
+            existsOrError(user.password, 'Senha não informada')
             existsOrError(user.confirmPassword, 'Confirmação de senha inválida')
             equalsOrError(user.password, user.confirmPassword, 'Senhas não conferem')
 
@@ -31,6 +31,7 @@ module.exports = app => {
                 .where({ email: user.email }).first()
         
             if(!user.id){
+
                 notExistsOrError(userFromDB, 'Usuário já cadastrado')
             }
         }catch(msg) {

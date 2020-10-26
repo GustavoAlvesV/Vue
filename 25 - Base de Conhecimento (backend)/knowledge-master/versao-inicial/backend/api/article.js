@@ -55,7 +55,7 @@ module.exports = app => {
 
     //Paginação
 
-    const limit = 10 //LIMITE DE ARTIGOS POR PÁGINA (Usado na páginação)
+    const limit = 2 //LIMITE DE ARTIGOS POR PÁGINA (Usado na páginação)
 
     const get = async ( req, res ) => {
         const page = req.query.page || 1

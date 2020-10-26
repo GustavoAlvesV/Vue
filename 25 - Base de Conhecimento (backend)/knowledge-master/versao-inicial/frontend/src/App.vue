@@ -3,14 +3,15 @@
 		<Header title="Cod3r - Base de Conhecimento" 
 			:hideToggle="false"
 			:hideUserDropdown="false"/>
-		<Menu />
+		<Menu v-if="user" />
 		<Content />
 		<Footer />
 	</div>
 </template>
 
 <script>
-
+import axios from "axios"
+import { baseApiUrl, userKey } from "@/global"
 import {mapState} from 'vuex'
 import Header from "./components/template/Header"
 import Menu from "./components/template/Menu"
@@ -21,7 +22,7 @@ import Footer from "./components/template/Footer"
 export default {
 	name: "App",
 	components: {Header, Menu, Content, Footer},
-	computed: mapState(['isMenuVisible'])
+	computed: mapState(['isMenuVisible', 'user'])
 }
 </script>
 

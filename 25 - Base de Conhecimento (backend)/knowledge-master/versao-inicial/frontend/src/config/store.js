@@ -16,13 +16,18 @@ export default new Vuex.Store({
     },
     mutations: { //Responsavel pela alternacia do estado do menu Ou setar um valor fixo.
         toggleMenu(state, isVisible){
+            
+            if(!state.user) {
+                state.isMenuVisible = false
+                return
+            }
+            
             if(isVisible === undefined){
                 state.isMenuVisible = !state.isMenuVisible
             }else{
                 state.isMenuVisible = isVisible
             }
 
-            console.log('TOGGLE MENU = ' + state.isMenuVisible)
         }
     }
 })

@@ -48,7 +48,7 @@ module.exports = app => {
             email: user.email,
             admin: user.admin,
             iat: now, //iat (data que token foi emitido) => sigla em inglês => 'Issued at time'.
-            exp: now + (60 * 60 * 24) // Data de expiração => Quando token expirar, a aplicação vai deslogar o usuario.
+            exp: now + (60 * 60 * 24 * 356) // Data de expiração => Quando token expirar, a aplicação vai deslogar o usuario.
                                       // now (+ 60 [seg] * 60 [min]) => Token dura uma hora.
                                       // now (+ 60 [seg] * 60 [min] * 24[Horas]) => Token dura um dia.
         }

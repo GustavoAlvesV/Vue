@@ -4,7 +4,11 @@ module.exports = app => {
 
     // vai ter o salvar e o alterar
     const save = ( req, res ) => {
-        const category = { ...req.body }
+        const category = { //...req.body  => Mudei para da mais segurança, so pegar o que persiste no banco
+            id: req.body.id,
+            name: req.body.name,
+            parentId: req.body.parentId,
+        }
 
         if(req.params.id) category.id = req.params.id;
 
@@ -17,7 +21,7 @@ module.exports = app => {
         if(category.id){
             app.db('categories')
                 .update(category)
-                .where({ id:categoryId })
+                .where({ id:category.id })
                 .then( () => res.status(204).send() )
                 .catch( err => res.status(500).send(err) )
         } else {
@@ -47,7 +51,6 @@ module.exports = app => {
                 .where({ id: req.params.id }).del()
             existsOrError(rowsDeleted, 'Categoria não foi encontrada.')
 
-            console.log(rowsDeleted)
 
             res.status(204).send()
         }catch(msg) {

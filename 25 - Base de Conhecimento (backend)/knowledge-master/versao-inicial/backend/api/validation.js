@@ -12,7 +12,7 @@ module.exports = app => {
 
     // SÃO AS REGRAS, PARA DIZER, O QUE DENTRO DO MEU SISTEMA NAO DEVE EXISTIR
     // OU NAO EXISTE OU ERRO (SE EXISTIR É ERRO)
-    function notExistsOrError(value){
+    function notExistsOrError(value, msg){
         try{
             existsOrError(value, msg)
         }catch(msg){  // SE RETORNA MSG => NAO EXISTE / SE NAO EXISTE => OK

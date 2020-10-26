@@ -106,4 +106,5 @@ export default {
         font-size: 1.3rem;
         margin-left: 20px;
     }
+
 </style>
